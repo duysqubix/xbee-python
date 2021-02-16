@@ -31,7 +31,7 @@ Installation
 You can install XBee Python library using `pip
 <https://pip.pypa.io/en/stable/>`_::
 
-    $ pip install digi-xbee
+    $ pip install digi-xbee-unofficial
 
 
 Install from Source
@@ -58,7 +58,7 @@ How to contribute
 -----------------
 
 The contributing guidelines are in the `CONTRIBUTING.rst document
-<https://github.com/digidotcom/xbee-python/blob/master/CONTRIBUTING.rst>`_.
+<https://github.com/duysqubix/xbee-python/blob/master/CONTRIBUTING.rst>`_.
 
 
 License
