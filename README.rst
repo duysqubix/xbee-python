@@ -14,7 +14,7 @@ The unofficial repository was spawned due to four main reasons that lacked in th
 
 1. Outdated releases and pypi packages. Latest release and current master branch are seperated by over 250 commits.
 
-2.Lack of activity by moderators regarding issues and open PR's. Some PR's date back to late 2019 with no activity, despite community reaching out. This causes a loss of interest in the project and fewer contributors.
+2. Lack of activity by moderators regarding issues and open PR's. Some PR's date back to late 2019 with no activity, despite community reaching out. This causes a loss of interest in the project and fewer contributors.
 
 3. Breaking the barrier of bureaucracy and allowing the continued effort of this library to be extended by the direct help of the community.
 
