@@ -72,7 +72,7 @@ covers the majority of this project with the following exceptions:
 * The `ISC license <https://github.com/digidotcom/xbee-python/blob/master/examples/LICENSE.txt>`_
   covers the contents of the examples directory.
 
-.. |pypiversion| image:: https://badge.fury.io/py/digi-xbee.svg
-    :target: https://pypi.org/project/digi-xbee-unofficial/
+.. |pypiversion| image:: https://badge.fury.io/py/digi-xbee-unofficial.svg
+    :target: https://badge.fury.io/py/digi-xbee-unofficial
 .. |pythonversion| image:: https://img.shields.io/pypi/pyversions/digi-xbee.svg
     :alt: PyPI - Python Version
