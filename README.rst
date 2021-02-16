@@ -28,7 +28,7 @@ this repository aims to branch from the official repo so folks from the communit
 Installation
 ------------
 
-You can install XBee Python library using `pip
+You can install the Unofficial XBee Python library using `pip
 <https://pip.pypa.io/en/stable/>`_::
 
     $ pip install digi-xbee-unofficial
@@ -37,7 +37,7 @@ You can install XBee Python library using `pip
 Install from Source
 -------------------
 
-You can install XBee Python library directly from the source file. To do
+You can install Unofficial XBee Python library directly from the source file. To do
 so, extract the source code to your computer and, from its root
 directory, execute the following command::
 
@@ -47,7 +47,7 @@ directory, execute the following command::
 Documentation
 -------------
 
-XBee Python library has user guide and API reference documentation hosted on
+The Unofficial XBee Python library has user guide and API reference documentation hosted on
 Read the Docs. You can find the latest, most up to date, documentation at
 `latest docs <https://xbplib.readthedocs.io/en/latest/>`_. To see only those
 features which have been released, check out the
@@ -72,7 +72,7 @@ covers the majority of this project with the following exceptions:
 * The `ISC license <https://github.com/digidotcom/xbee-python/blob/master/examples/LICENSE.txt>`_
   covers the contents of the examples directory.
 
-.. |pypiversion| image:: https://badge.fury.io/py/digi-xbee.svg
-    :target: https://pypi.org/project/digi-xbee/
+.. |pypiversion| image:: https://badge.fury.io/py/digi-xbee-unofficial.svg
+    :target: https://badge.fury.io/py/digi-xbee-unofficial
 .. |pythonversion| image:: https://img.shields.io/pypi/pyversions/digi-xbee.svg
     :alt: PyPI - Python Version
