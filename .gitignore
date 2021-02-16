@@ -2,3 +2,7 @@
 /doc/_build
 .idea
 venv/
+.vscode
+build 
+dist 
+*.egg-info

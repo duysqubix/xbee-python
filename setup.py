@@ -30,12 +30,13 @@ if sys.argv[1] == 'publish':
 here = os.path.abspath(os.path.dirname(__file__))
 
 about = {}
-with open(os.path.join(here, 'digi', 'xbee', '__init__.py'), 'r', 'utf-8') as f:
+with open(os.path.join(here, 'digi', 'xbee', '__init__.py'), 'r',
+          'utf-8') as f:
     exec(f.read(), about)
 
 with open(os.path.join(here, 'README.rst'), encoding='utf-8') as f:
     long_description = f.read()
- 
+
 setup(
     name=about['__title__'],
     namespace_packages=['digi'],
@@ -56,7 +57,7 @@ setup(
         'pyserial>=3',
     ],
     extras_require={
-        "SRP":  ["srp"],
+        "SRP": ["srp"],
     },
     classifiers=[
         'Development Status :: 5 - Production/Stable',
