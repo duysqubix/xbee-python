@@ -8676,6 +8676,27 @@ class XBeeNetwork:
         """
         return self.__scan_counter
 
+
+    def on_connection_append(self, connection):
+        """
+        Hook that is called right before a connection is attached to network
+
+        Args:
+            connection (:class:`.Connection`) : the connection obj about to be added to network
+        """
+        pass
+
+
+    def on_connection_remove(self, connection):
+        """
+        Hook that is called right before a connection is removed from network
+
+        Args:
+            connection (:class:`.Connection`) : the connection obj about to be removed from network
+
+        """
+        pass
+
     def start_discovery_process(self, deep=False, n_deep_scans=1):
         """
         Starts the discovery process. This method is not blocking.
@@ -10771,6 +10792,7 @@ class XBeeNetwork:
 
             return self.__connections[index]
 
+
     def _append_connection(self, connection):
         """
         Adds a new connection to the network.
@@ -10785,6 +10807,7 @@ class XBeeNetwork:
             raise ValueError("Connection cannot be None")
 
         with self.__conn_lock:
+            self.on_connection_append(connection)
             self.__connections.append(connection)
 
     def _del_connection(self, connection):
@@ -10802,6 +10825,7 @@ class XBeeNetwork:
 
         with self.__conn_lock:
             if connection in self.__connections:
+                self.on_connection_remove(connection)
                 self.__connections.remove(connection)
 
     def _add_connection(self, connection):
