@@ -10791,7 +10791,7 @@ class XBeeNetwork:
 
         return connections
 
-    def __get_connection(self, node_a, node_b):
+    def _get_connection(self, node_a, node_b):
         """
         Returns the connection with ends `node_a` and `node_b`.
 
@@ -10893,8 +10893,8 @@ class XBeeNetwork:
         self.on_connection_add(connection)
 
         # Check if the connection already exists a -> b or b -> a
-        c_ab = self.__get_connection(node_a, node_b)
-        c_ba = self.__get_connection(node_b, node_a)
+        c_ab = self._get_connection(node_a, node_b)
+        c_ba = self._get_connection(node_b, node_a)
 
         # If none of them exist, add it
         if not c_ab and not c_ba:
