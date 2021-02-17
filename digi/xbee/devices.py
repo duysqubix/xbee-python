@@ -8593,6 +8593,55 @@ class XBeeNetwork:
     Logger.
     """
 
+    ##### XbeeNetwork Hooks #####
+    def pre_connection_add(self, connection):
+        """
+        Hook called before any type checking or processing on connection attempting
+        to be added to the network
+        """
+        pass
+
+    def on_connection_add(self, connection):
+        """
+        Hook called before processing an incomming connection object.
+
+        Args:
+            connection (:class:`.Connection`) : the connection obj about to be added to network        
+        """
+        pass
+
+    def after_connection_add(self, connection):
+        """
+        Hook called after connection has been updated or added to network.
+
+        Args:
+            connection (:class:`.Connection`) : the connection obj about to be added to network        
+        """
+        pass
+
+    def on_connection_append(self, connection):
+        """
+        Hook that is called only if connection is not found in network and right before it is
+        appended to the interal connection list
+
+        Args:
+            connection (:class:`.Connection`) : the connection obj about to be added to network
+        """
+        pass
+
+
+    def on_connection_remove(self, connection):
+        """
+        Hook that is called right before a connection is deleted from network
+
+        Args:
+            connection (:class:`.Connection`) : the connection obj about to be removed from network
+
+        """
+        pass
+
+    ############### End of Hooks ####################
+
     def __init__(self, xbee_device):
         """
         Class constructor. Instantiates a new `XBeeNetwork`.
@@ -8676,43 +8725,6 @@ class XBeeNetwork:
         """
         return self.__scan_counter
 
-    def on_connection_add(self, connection):
-        """
-        Hook called before processing XbeeNetWork._add_connection.
-
-        Args:
-            connection (:class:`.Connection`) : the connection obj about to be added to network        
-        """
-        pass
-
-    def after_connection_add(self, connection):
-        """
-        Hook called after processing XbeeNetWork._add_connection.
-
-        Args:
-            connection (:class:`.Connection`) : the connection obj about to be added to network        
-        """
-        pass
-
-    def on_connection_append(self, connection):
-        """
-        Hook that is called only if connection is not found in network.
-
-        Args:
-            connection (:class:`.Connection`) : the connection obj about to be added to network
-        """
-        pass
-
-
-    def on_connection_remove(self, connection):
-        """
-        Hook that is called right before a connection is deleted from network
-
-        Args:
-            connection (:class:`.Connection`) : the connection obj about to be removed from network
-
-        """
-        pass
 
     def start_discovery_process(self, deep=False, n_deep_scans=1):
         """
@@ -10857,10 +10869,13 @@ class XBeeNetwork:
             Boolean: `True` if the connection was successfully added, `False`
                 if the connection was already added.
         """
-        if not connection:
+        # hook
+        self.pre_connection_add(connection)
+
+        if not isinstance(connection, Connection):
             return False
 
-        self.on_connection_add(connection)
+        return_val = False
         node_a = self.get_device_by_64(connection.node_a.get_64bit_addr())
         node_b = self.get_device_by_64(connection.node_b.get_64bit_addr())
 
@@ -10874,6 +10889,9 @@ class XBeeNetwork:
         if not node_a or not node_b:
             return False
 
+        # hook
+        self.on_connection_add(connection)
+
         # Check if the connection already exists a -> b or b -> a
         c_ab = self.__get_connection(node_a, node_b)
         c_ba = self.__get_connection(node_b, node_a)
@@ -10882,25 +10900,27 @@ class XBeeNetwork:
         if not c_ab and not c_ba:
             connection.scan_counter_a2b = self.__scan_counter
             self._append_connection(connection)
-            return True
-
-        # If the connection exists, update its data
-        if c_ab:
+            return_val = True
+        
+        # Connection exists, update it
+        elif c_ab:
             if c_ab.scan_counter_a2b != self.__scan_counter:
                 c_ab.lq_a2b = connection.lq_a2b
                 c_ab.status_a2b = connection.status_a2b
                 c_ab.scan_counter_a2b = self.__scan_counter
-                return True
-
+                return_val= True
         elif c_ba:
             if c_ba.scan_counter_b2a != self.__scan_counter:
                 c_ba.lq_b2a = connection.lq_a2b
                 c_ba.status_b2a = connection.status_a2b
                 c_ba.scan_counter_b2a = self.__scan_counter
-                return True
+                return_val= True
+        else:
+            return_val = False
 
+        # hook
         self.after_connection_add(connection)
-        return False
+        return return_val
 
     def __remove_node_connections(self, node, only_as_node_a=False, force=False):
         """
