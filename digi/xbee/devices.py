@@ -8676,10 +8676,27 @@ class XBeeNetwork:
         """
         return self.__scan_counter
 
+    def on_connection_add(self, connection):
+        """
+        Hook called before processing XbeeNetWork._add_connection.
+
+        Args:
+            connection (:class:`.Connection`) : the connection obj about to be added to network        
+        """
+        pass
+
+    def after_connection_add(self, connection):
+        """
+        Hook called after processing XbeeNetWork._add_connection.
+
+        Args:
+            connection (:class:`.Connection`) : the connection obj about to be added to network        
+        """
+        pass
 
     def on_connection_append(self, connection):
         """
-        Hook that is called right before a connection is attached to network
+        Hook that is called only if connection is not found in network.
 
         Args:
             connection (:class:`.Connection`) : the connection obj about to be added to network
@@ -8689,7 +8706,7 @@ class XBeeNetwork:
 
     def on_connection_remove(self, connection):
         """
-        Hook that is called right before a connection is removed from network
+        Hook that is called right before a connection is deleted from network
 
         Args:
             connection (:class:`.Connection`) : the connection obj about to be removed from network
@@ -10843,6 +10860,7 @@ class XBeeNetwork:
         if not connection:
             return False
 
+        self.on_connection_add(connection)
         node_a = self.get_device_by_64(connection.node_a.get_64bit_addr())
         node_b = self.get_device_by_64(connection.node_b.get_64bit_addr())
 
@@ -10881,6 +10899,7 @@ class XBeeNetwork:
                 c_ba.scan_counter_b2a = self.__scan_counter
                 return True
 
+        self.after_connection_add(connection)
         return False
 
     def __remove_node_connections(self, node, only_as_node_a=False, force=False):
@@ -12218,6 +12237,7 @@ class Connection:
                                                               XBeeProtocol.XTEND_DM,
                                                               XBeeProtocol.XLR_DM,
                                                               XBeeProtocol.SX))
+                                
         return LinkQuality.UNKNOWN
 
     @property
