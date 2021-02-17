@@ -10787,7 +10787,7 @@ class XBeeNetwork:
         with self.__conn_lock:
             self.__connections.append(connection)
 
-    def __del_connection(self, connection):
+    def _del_connection(self, connection):
         """
         Removes a connection from the network.
 
@@ -10964,7 +10964,7 @@ class XBeeNetwork:
 
         if force:
             for conn in connections_to_remove:
-                self.__del_connection(conn)
+                self._del_connection(conn)
 
         return connections_to_remove
 
@@ -10998,7 +10998,7 @@ class XBeeNetwork:
 
         if force:
             for conn in c_purged:
-                self.__del_connection(conn)
+                self._del_connection(conn)
 
         return c_purged
 
