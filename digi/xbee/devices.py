@@ -10771,7 +10771,7 @@ class XBeeNetwork:
 
             return self.__connections[index]
 
-    def __append_connection(self, connection):
+    def _append_connection(self, connection):
         """
         Adds a new connection to the network.
 
@@ -10839,7 +10839,7 @@ class XBeeNetwork:
         # If none of them exist, add it
         if not c_ab and not c_ba:
             connection.scan_counter_a2b = self.__scan_counter
-            self.__append_connection(connection)
+            self._append_connection(connection)
             return True
 
         # If the connection exists, update its data
