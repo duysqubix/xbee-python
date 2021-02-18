@@ -78,7 +78,7 @@ setup(
     ],
     project_urls={
         'Documentation': 'https://xbplib.readthedocs.io',
-        'Source': 'https://github.com/digidotcom/xbee-python',
-        'Tracker': 'https://github.com/digidotcom/xbee-python/issues',
+        'Source': 'https://github.com/duysqubix/xbee-python',
+        'Tracker': 'https://github.com/duysqubix/xbee-python/issues',
     },
 )
